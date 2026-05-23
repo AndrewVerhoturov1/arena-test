@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "table-map-editor-canvas-local-fixed",
+  "displayName": "Table Map Editor Canvas Local Fixed",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
