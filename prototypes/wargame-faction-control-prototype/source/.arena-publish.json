@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "wargame-faction-control-prototype",
+  "displayName": "Wargame Faction Control Prototype",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
