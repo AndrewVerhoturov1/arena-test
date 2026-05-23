@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "table-map-editor-v2-gpt",
+  "displayName": "Основной макет редактора карты",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
