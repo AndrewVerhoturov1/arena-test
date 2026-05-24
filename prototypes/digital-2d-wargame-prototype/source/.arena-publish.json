@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "digital-2d-wargame-prototype",
+  "displayName": "Digital 2d Wargame Prototype",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
