@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "digital-wargame-table-prototype-3",
+  "displayName": "Digital Wargame Table Prototype (3)",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
