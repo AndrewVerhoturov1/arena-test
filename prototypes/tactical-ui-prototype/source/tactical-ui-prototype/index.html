@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Тактический экран — прототип</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <svg class="svg-sprite" aria-hidden="true">
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></symbol>
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 3 9 5-9 5-9-5 9-5Zm-7.5 9L12 16l7.5-4M4.5 16 12 20l7.5-4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-order" viewBox="0 0 24 24"><path d="M5 19V5h9l5 5v9H5Zm9-14v5h5M8 13h8M8 16h6" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M12 10v6M12 7.4h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+    <symbol id="i-route" viewBox="0 0 24 24"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M7.5 16.5c1.5-1.5 1-4.5 3-5.5s4 .5 6-3.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z" fill="none" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="2.7"/></symbol>
+    <symbol id="i-radio" viewBox="0 0 24 24"><path d="M7 9a7 7 0 0 0 0 6M17 9a7 7 0 0 1 0 6M4 6a11 11 0 0 0 0 12M20 6a11 11 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-crosshair" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5" stroke="currentColor" stroke-width="1.5"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+    <symbol id="i-standing" viewBox="0 0 24 24"><circle cx="12" cy="4.5" r="2"/><path d="M12 7v6m0-3-4 3m4-3 4 3m-4 0-3 7m3-7 3 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-crouched" viewBox="0 0 24 24"><circle cx="10" cy="5" r="2"/><path d="m10 7 2 5 5 1m-5-1-4 3m4-3-1 7m-3-4-4 4m13-6 2 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-prone" viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><path d="m7 12 5-2 4 2 5-1m-9-1 2 5m2-3 2 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-walk" viewBox="0 0 24 24"><circle cx="12" cy="4" r="2"/><path d="m10 7-2 5 4 2 2 6m-4-8 4-2 3 3m-6 2-4 5" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="i-ammo" viewBox="0 0 24 24"><path d="M9 3h6l1 4v13H8V7l1-4Zm0 4h6M10 11h4" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 20S4 16 4 9.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 8 2.5C20 16 12 20 12 20Z" fill="none" stroke="currentColor" stroke-width="1.7"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2.8 20h18.4L12 3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/><path d="M12 9v5M12 17h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  </svg>
+
+  <div class="app-shell" id="appShell">
+    <header class="topbar">
+      <section class="operation-block">
+        <span class="operation-kicker">ТАКТИЧЕСКИЙ КАНАЛ · 01</span>
+        <div class="operation-title-row">
+          <h1 id="operationTitle">Операция «Сухой овраг»</h1>
+          <span class="connection-pill"><svg><use href="#i-radio"/></svg><span id="connectionText">Связь устойчива</span></span>
+        </div>
+        <p id="operationPhase">Разведка перед рубежом</p>
+      </section>
+
+      <section class="time-cluster" aria-label="Управление временем">
+        <div class="sim-clock">
+          <span class="clock-caption">ВРЕМЯ СИМУЛЯЦИИ</span>
+          <strong id="simTime">08:17:24</strong>
+          <span class="pause-state" id="pauseState">ПАУЗА</span>
+        </div>
+        <div class="time-controls">
+          <button class="icon-button pause-button active" id="pauseButton" data-tooltip="Пауза или продолжение · Пробел" aria-label="Пауза">
+            <svg><use href="#i-play"/></svg>
+          </button>
+          <div class="speed-switch" id="speedSwitch" role="group" aria-label="Скорость времени">
+            <button data-speed="0.5">×0,5</button>
+            <button data-speed="1" class="active">×1</button>
+            <button data-speed="2">×2</button>
+            <button data-speed="4">×4</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="top-actions">
+        <div class="weather-line" id="weatherText">Облачно · ветер 3 м/с</div>
+        <button class="quiet-button" id="shortcutsButton" data-tooltip="Памятка по клавишам">
+          <span class="keycap">?</span> Клавиши
+        </button>
+        <button class="quiet-button" id="triggerEventButton" data-tooltip="Показать следующее демонстрационное событие">
+          <svg><use href="#i-alert"/></svg> Событие
+        </button>
+      </section>
+    </header>
+
+    <main class="workspace" id="workspace">
+      <aside class="side-panel left-panel" id="leftPanel" aria-label="Состав подразделения">
+        <header class="panel-heading">
+          <div>
+            <span class="eyebrow">ПОДРАЗДЕЛЕНИЕ</span>
+            <h2 id="squadName">1-е отделение</h2>
+          </div>
+          <button class="panel-collapse" data-collapse="left" data-tooltip="Свернуть состав" aria-label="Свернуть состав">
+            <svg><use href="#i-chevron"/></svg>
+          </button>
+        </header>
+        <div class="panel-collapsed-icon"><svg><use href="#i-menu"/></svg><span>А</span></div>
+        <div class="panel-content">
+          <button class="group-card" id="groupSelectButton">
+            <div class="group-emblem">А</div>
+            <div>
+              <strong>Альфа</strong>
+              <span>6 бойцов · командир на связи</span>
+            </div>
+            <span class="group-count">6</span>
+          </button>
+          <div class="squad-task">
+            <span>ЗАДАЧА ОТДЕЛЕНИЯ</span>
+            <strong id="squadTask">Занять высоту 117 и вести наблюдение</strong>
+          </div>
+          <div class="roster" id="roster"></div>
+          <div class="legend-mini">
+            <span><i class="legend-dot selected"></i> выбор</span>
+            <span><i class="legend-dot warning"></i> внимание</span>
+            <span><i class="legend-dot critical"></i> угроза</span>
+          </div>
+        </div>
+      </aside>
+
+      <section class="map-column">
+        <div class="map-toolbar">
+          <div class="mode-tabs" role="group" aria-label="Режим выбора">
+            <button data-selection-mode="unit" class="active"><svg><use href="#i-target"/></svg> Боец</button>
+            <button data-selection-mode="group"><svg><use href="#i-menu"/></svg> Группа</button>
+          </div>
+          <div class="map-tool-actions">
+            <button id="routeToolButton" class="tool-button"><svg><use href="#i-route"/></svg> Проложить маршрут <span class="keycap">R</span></button>
+            <button id="centerButton" class="tool-button compact" data-tooltip="Центрировать выбранного бойца"><svg><use href="#i-crosshair"/></svg></button>
+          </div>
+          <div class="active-layer-summary" id="activeLayerSummary">Слои выключены</div>
+        </div>
+
+        <div class="map-viewport" id="mapViewport" tabindex="0" aria-label="Тактическая карта">
+          <div class="map-image"></div>
+          <div class="map-vignette"></div>
+          <div class="map-grid"></div>
+
+          <div class="map-layer layer-danger" data-layer-view="danger"></div>
+          <div class="map-layer layer-concealment" data-layer-view="concealment"></div>
+          <div class="map-layer layer-visibility" data-layer-view="visibility"></div>
+          <div class="map-layer layer-route-cost" data-layer-view="routeCost"></div>
+          <div class="map-layer layer-noise" data-layer-view="noise"></div>
+          <div class="map-layer layer-cover" data-layer-view="cover">
+            <span style="left:17%;top:31%"></span><span style="left:50%;top:48%"></span><span style="left:73%;top:77%"></span><span style="left:89%;top:48%"></span>
+          </div>
+          <div class="map-layer layer-positions" data-layer-view="positions">
+            <span class="position-mark observation" style="left:46%;top:43%">Н</span>
+            <span class="position-mark firing" style="left:73%;top:55%">О</span>
+            <span class="position-mark support" style="left:31%;top:62%">П</span>
+          </div>
+
+          <svg class="threat-lines" id="threatLines" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <svg class="route-overlay" id="routeOverlay" viewBox="0 0 1000 600" preserveAspectRatio="none" aria-hidden="true"></svg>
+          <div class="enemy-layer" id="enemyLayer"></div>
+          <div class="unit-layer" id="unitLayer"></div>
+
+          <div class="map-scale">
+            <strong>20 м</strong>
+            <span></span>
+          </div>
+          <div class="map-coordinates" id="mapCoordinates">КВ. 11-Г · 54.821 / 37.406</div>
+          <div class="route-instruction" id="routeInstruction"><svg><use href="#i-route"/></svg> Нажмите на карте, чтобы указать конечную точку</div>
+
+          <section class="event-stack" id="eventStack" aria-live="polite"></section>
+          <div class="paused-overlay" id="pausedOverlay"><span>СИМУЛЯЦИЯ НА ПАУЗЕ</span></div>
+        </div>
+      </section>
+
+      <aside class="side-panel right-panel" id="rightPanel" aria-label="Инструменты и сведения">
+        <header class="right-tabs" role="tablist">
+          <button class="active" data-right-tab="layers" role="tab" data-tooltip="Информационные слои"><svg><use href="#i-layers"/></svg><span>Слои</span></button>
+          <button data-right-tab="orders" role="tab" data-tooltip="Текущий приказ"><svg><use href="#i-order"/></svg><span>Приказ</span></button>
+          <button data-right-tab="info" role="tab" data-tooltip="Подробные сведения"><svg><use href="#i-info"/></svg><span>Сведения</span></button>
+          <button class="panel-collapse right" data-collapse="right" data-tooltip="Свернуть панель" aria-label="Свернуть правую панель"><svg><use href="#i-chevron"/></svg></button>
+        </header>
+        <div class="right-collapsed-tools">
+          <button data-right-tab="layers"><svg><use href="#i-layers"/></svg></button>
+          <button data-right-tab="orders"><svg><use href="#i-order"/></svg></button>
+          <button data-right-tab="info"><svg><use href="#i-info"/></svg></button>
+        </div>
+        <div class="right-content" id="rightContent"></div>
+      </aside>
+    </main>
+
+    <section class="bottom-panel" id="bottomPanel" aria-label="Карточка выбранного объекта">
+      <button class="bottom-collapse" data-collapse="bottom" data-tooltip="Свернуть карточку"><svg><use href="#i-chevron"/></svg></button>
+      <div class="bottom-summary" id="bottomSummary"></div>
+      <div class="bottom-content" id="bottomContent"></div>
+    </section>
+  </div>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+
+  <dialog class="shortcuts-dialog" id="shortcutsDialog">
+    <header><div><span class="eyebrow">ПАМЯТКА</span><h2>Основные клавиши</h2></div><button id="closeShortcuts"><svg><use href="#i-close"/></svg></button></header>
+    <div class="shortcut-grid">
+      <span><kbd>Пробел</kbd><b>Пауза</b></span>
+      <span><kbd>R</kbd><b>Маршрут</b></span>
+      <span><kbd>1–7</kbd><b>Слои карты</b></span>
+      <span><kbd>Esc</kbd><b>Отмена действия</b></span>
+      <span><kbd>G</kbd><b>Выбор группы</b></span>
+      <span><kbd>E</kbd><b>Демонстрационное событие</b></span>
+    </div>
+    <p>Правая кнопка мыши на карте также строит маршрут к указанной точке.</p>
+  </dialog>
+
+<script type="module" src="data.js"></script>
+<script type="module" src="state.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
