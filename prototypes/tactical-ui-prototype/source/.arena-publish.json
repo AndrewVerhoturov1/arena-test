@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "tactical-ui-prototype",
+  "displayName": "Tactical UI Prototype",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
