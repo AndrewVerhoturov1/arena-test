@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "slug": "tactical-game-ui-redesign",
+  "displayName": "Tactical Game UI Redesign",
+  "installCommand": "npm install",
+  "buildCommand": "npm run build",
+  "outputDir": "dist",
+  "runtime": "static-site",
+  "extraExclude": []
+}
